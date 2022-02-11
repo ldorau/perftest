@@ -1931,7 +1931,7 @@ static int set_link_layer(struct ibv_context *context, struct perftest_parameter
 	struct ibv_port_attr port_attr;
 	int8_t curr_link = params->link_type;
 
-	if (ibv_query_port(context, params->ib_port, &port_attr)) {
+	if (ibv_query_port(context, params->ib_port, &port_attr)) { /* XXX LDORAU */
 		fprintf(stderr, " Unable to query port %d attributes\n", params->ib_port);
 		return FAILURE;
 	}
@@ -2319,7 +2319,7 @@ int parser(struct perftest_parameters *user_param,char *argv[], int argc)
 		switch (c) {
 
 			case 'p': user_param->port = strtol(optarg, NULL, 0); break;
-			case 'd': GET_STRING(user_param->ib_devname,strdupa(optarg)); break;
+			case 'd': GET_STRING(user_param->ib_devname,strdupa(optarg)); break; /* XXX LDORAU ib_devname */
 			case 'i': user_param->ib_port = strtol(optarg, NULL, 0);
 				  if (user_param->ib_port < MIN_IB_PORT) {
 					  fprintf(stderr, "IB Port can't be less than %d\n", MIN_IB_PORT);
@@ -2341,7 +2341,7 @@ int parser(struct perftest_parameters *user_param,char *argv[], int argc)
 					  user_param->raw_qos = 1;
 				  break;
 			case 'x': CHECK_VALUE(user_param->gid_index, uint8_t, MIN_GID_IX, MAX_GID_IX, "Gid index");
-				  user_param->use_gid_user = 1; break;
+				  user_param->use_gid_user = 1; break;  /* XXX LDORAU gid_index */
 			case 'c': change_conn_type(&user_param->connection_type,user_param->verb,optarg); break;
 			case 'q': if (user_param->tst != BW) {
 					fprintf(stderr," Multiple QPs only available on bw tests\n");

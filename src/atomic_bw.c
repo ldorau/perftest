@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 	if (!ib_dev)
 		return 7;
 
-	/* Getting the relevant context from the device */
+	/* Getting the relevant context from the device XXX LDORAU */
 	ctx.context = ibv_open_device(ib_dev);
 	if (!ctx.context) {
 		fprintf(stderr, " Couldn't get context for the device\n");
